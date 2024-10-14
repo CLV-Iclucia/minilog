@@ -7,9 +7,11 @@ int main() {
   minilog::info("Hello, World!");
   minilog::info("Test format {}", 42);
   minilog::warn("Test format {}", 42);
+  minilog::info("Test format {} {}", 42, 42);
   auto logger = minilog::createFileLogger("test.txt");
   logger->info("Hello, World!");
   logger->info("Test format {}", 42);
   logger->warn("Test format {}", 42);
+  logger->info("Test format {} {}", 42, 114514);
   return 0;
 }

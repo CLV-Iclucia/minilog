@@ -28,7 +28,7 @@ struct Logger : RAII {
     template <typename... Args>                                   \
     Logger& LEVEL(std::format_string<Args...> fmt, Args&&... args) { \
         if (level <= LogLevel::LEVEL) { \
-        outStream() << "["#LEVEL"]: " << std::format(std::move(fmt), std::forward<Args&&...>(args...)) << "\n"; \
+        outStream() << "["#LEVEL"]: " << std::format(std::move(fmt), std::forward<Args>(args)...) << "\n"; \
         }                              \
         return *this;                  \
         }
@@ -60,7 +60,7 @@ protected:
 #define GENERATE_QUICK_FMT_LOGGING_FUNCTION(LEVEL) \
     template <typename... Args> \
     void LEVEL(std::format_string<Args...> fmt, Args&&... args) { \
-        Logger().LEVEL(std::move(fmt), std::forward<Args&&...>(args...)); \
+        Logger().LEVEL(std::move(fmt), std::forward<Args>(args)...); \
     }
 
 #define GENERATE_QUICK_LOGGING_FUNCTION(LEVEL) \
